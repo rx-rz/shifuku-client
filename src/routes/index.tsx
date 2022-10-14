@@ -22,10 +22,11 @@ const defaultRoutes = [
   { path: "/auth/signup", element: <Signup /> },
   { path: "rooms/:roomname", element: <RoomPage /> },
   { path: "booking", element: <BookingPage /> },
+  { path: "auth/login", element: <Login /> },
 ];
 
 const authRoutes = [
-  { path: "auth/login", element: <Login /> },
+
   { path: "/dashboard", element: <Overview /> },
   { path: "/dashboard/bookings", element: <Bookings /> },
   { path: "/dashboard/rooms", element: <Rooms /> },
