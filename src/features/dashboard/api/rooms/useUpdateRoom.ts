@@ -13,7 +13,7 @@ export const useUpdateRooms = () => {
   }): Promise<Room> => {
     const { id, data } = props;
     const response = await axios.patch(
-      `/rooms/${id}`,
+      `${process.env.REACT_APP_LIVE_URL}/rooms/${id}`,
       { ...data },
       {
         headers: {

@@ -17,7 +17,7 @@ export const useCreateRoom = () => {
   const roomData = useQuery(["rooms"]).data;
 
   const postRooms = async (data: Omit<RoomFormProps, "noOfRooms">) => {
-    const response = await axios.post("/rooms", { ...data });
+    const response = await axios.post(`${process.env.REACT_APP_LIVE_URL}/rooms`, { ...data });
     return response.data;
   };
 

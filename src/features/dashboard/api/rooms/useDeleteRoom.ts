@@ -5,7 +5,7 @@ export const useDeleteRoom = () => {
   const queryClient = useQueryClient();
   const roomData = useQuery(["rooms"]).data;
   const postRooms = async (id: string) => {
-    const response = await axios.delete(`/rooms/${id}`);
+    const response = await axios.delete(`${process.env.REACT_APP_LIVE_URL}/rooms/${id}`);
     return response.data;
   };
 

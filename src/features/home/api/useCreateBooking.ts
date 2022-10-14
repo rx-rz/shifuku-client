@@ -21,7 +21,7 @@ export const useCreateBooking = () => {
   const [error, setError] = useState<any>("");
   const queryData = useQuery(["booking"]).data;
   const createBooking = async (data: BookingFormProps) => {
-    const response = await axios.post("/bookings", data);
+    const response = await axios.post(`${process.env.REACT_APP_LIVE_URL}/bookings`, data);
     return response.data;
   };
 

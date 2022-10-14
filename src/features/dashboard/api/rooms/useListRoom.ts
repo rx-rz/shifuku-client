@@ -4,7 +4,7 @@ import { Room } from "src/types";
 
 export const useListRooms = () => {
   const fetchRooms = async (): Promise<Room[]> => {
-    const { data } = await axios.get("/rooms");
+    const { data } = await axios.get(`${process.env.REACT_APP_LIVE_URL}/rooms`);
     return data;
   };
 

@@ -6,7 +6,7 @@ const user = JSON.parse(localStorage.getItem("user")!);
 const userData: UserAuthProps = user;
 export const useListBooking = () => {
   const fetchBookings = async (): Promise<Booking[]> => {
-    const { data } = await axios.get("/bookings/", {
+    const { data } = await axios.get( `${process.env.REACT_APP_LIVE_URL}/bookings`, {
       headers: {
         Authorization: `${userData.user.firstName} ${userData.token}`,
       },

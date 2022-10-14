@@ -38,7 +38,7 @@ export const useSignup = () => {
   };
 
   const signupUser = async (data: SignupProps): Promise<UserAuthProps> => {
-    const response = await axios.post("/user/signup", data);
+    const response = await axios.post(`${process.env.REACT_APP_LIVE_URL}/user/signup`, data);
     return response.data;
   };
 

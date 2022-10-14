@@ -6,7 +6,7 @@ const user = JSON.parse(localStorage.getItem("user")!);
 const userData: UserAuthProps = user;
 export const useDeleteBooking = () => {
   const deleteBooking = async (id: string) => {
-    const { data } = await axios.delete(`/bookings/${id}`, {
+    const { data } = await axios.delete(`${process.env.REACT_APP_LIVE_URL}/bookings/${id}`, {
       headers: {
         Authorization: `${userData.user.firstName} ${userData.token}`,
       },

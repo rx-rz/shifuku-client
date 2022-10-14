@@ -12,7 +12,7 @@ type Room = {
 
 export const useAvailableRooms = () => {
   const fetchRooms = async (): Promise<Room[]> => {
-    const { data } = await axios.get("/rooms");
+    const { data } = await axios.get(`${process.env.REACT_APP_LIVE_URL}/rooms`);
     return data;
   };
 

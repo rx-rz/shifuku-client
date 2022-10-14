@@ -30,7 +30,7 @@ export const useLogin = () => {
   const [error, setError] = useState<any>("");
   
   const loginUser = async (data: LoginFormProps): Promise<UserAuthProps> => {
-    const response = await axios.post("/user/login", data);
+    const response = await axios.post(`${process.env.REACT_APP_LIVE_URL}/user/login`, data);
     return response.data;
   };
 

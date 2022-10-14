@@ -11,7 +11,7 @@ export const useAcceptBooking = () => {
     roomId: string;
   }): Promise<Booking> => {
     const response = await axios.patch(
-      `/bookings/${props.id}`,
+        `${process.env.LIVE_URL}/bookings/${props.id}`,
       {
         bookingStatus: "approved",
       },
