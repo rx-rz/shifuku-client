@@ -1,5 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useRoomStore } from "src/store/useRoomStore";
+import { Room } from "src/types";
 import { useListRooms } from "./useListRoom";
 
 type RoomFormProps = {
@@ -12,22 +14,22 @@ type RoomFormProps = {
 
 export const useCreateRoom = () => {
   const { data: rooms } = useListRooms();
+  const addRoomStore = useRoomStore((state) => state.addRoom);
   const queryClient = useQueryClient();
   const noOfRooms = rooms && rooms?.length + 1;
-  const roomData = useQuery(["rooms"]).data;
 
   const postRooms = async (data: Omit<RoomFormProps, "noOfRooms">) => {
-    const response = await axios.post(`${process.env.REACT_APP_LIVE_URL}/rooms`, { ...data });
+    const response = await axios.post(
+      `${process.env.REACT_APP_LIVE_URL}/rooms`,
+      { ...data }
+    );
     return response.data;
   };
 
-  const onSuccess = async () => {
-    await queryClient
-      .invalidateQueries(["rooms"])
-      .then(() => {
-        sessionStorage.setItem("rooms", JSON.stringify(roomData));
-      })
-      // .then(() => (window.location.pathname = "/dashboard/rooms"));
+  const onSuccess = async (data: Room) => {
+    await queryClient.invalidateQueries(["rooms"]).then(() => {
+      addRoomStore(data);
+    });
   };
 
   const onError = (err: any) => {};

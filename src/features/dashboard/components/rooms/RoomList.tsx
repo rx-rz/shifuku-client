@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { useListRooms, useDeleteRoom } from "../../api/";
 import { Button, LinkTo, DashboardCard } from "src/components";
 import { Room } from "src/types";
+import { useRoomStore } from "src/store/useRoomStore";
 export const RoomList = () => {
   const { data } = useListRooms();
+  const roomStore = useRoomStore((state) => state.rooms);
   const { handleRoomDelete } = useDeleteRoom();
 
   const [rooms, setRooms] = useState<Room[]>(
     data
       ? data.sort((a, b) => a.roomNumber - b.roomNumber)
-      : JSON.parse(sessionStorage.getItem("rooms")!)
+      : roomStore.sort((a, b) => a.roomNumber - b.roomNumber)
   );
 
   const roomSort = (a: "roomNumber" | "roomPrice" | "roomType") => {
@@ -22,9 +24,7 @@ export const RoomList = () => {
           setRooms([...roomNumberSort]);
           break;
         case "roomPrice":
-          const priceSort = rooms.sort(
-            (a, b) => b.roomPrice - a.roomPrice
-          );
+          const priceSort = rooms.sort((a, b) => b.roomPrice - a.roomPrice);
           setRooms([...priceSort]);
           break;
         case "roomType":
@@ -39,7 +39,7 @@ export const RoomList = () => {
   return (
     <div className="mx-auto my-0 font-general_sans">
       <>
-        {rooms && (
+        {rooms && data && (
           <>
             <div className="bg-secondary py-16 w-full">
               <div className="w-9/12 mx-auto">

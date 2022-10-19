@@ -1,23 +1,22 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useRoomStore } from "src/store/useRoomStore";
+import { Room } from "src/types";
 
 export const useDeleteRoom = () => {
   const queryClient = useQueryClient();
-  // const roomData = useQuery(["rooms"]).data;
+  const deleteRoomStore = useRoomStore((state) => state.deleteRoom);
   const postRooms = async (id: string) => {
-    const response = await axios.delete(`${process.env.REACT_APP_LIVE_URL}/rooms/${id}`);
+    const response = await axios.delete(
+      `${process.env.REACT_APP_LIVE_URL}/rooms/${id}`
+    );
     return response.data;
   };
 
-  const onSuccess = async () => {
+  const onSuccess = async (data: Room) => {
     await queryClient.invalidateQueries(["rooms"]).then(() => {
-      if (window.location.pathname !== "/dashboard/rooms") {
-        window.location.pathname = "/dashboard/rooms";
-        // sessionStorage.setItem("rooms", JSON.stringify(roomData));
-      } else {
-        // sessionStorage.setItem("rooms", JSON.stringify(roomData));
-        // window.location.reload();
-      }
+      deleteRoomStore(data._id);
+      window.location.pathname = "/dashboard/rooms";
     });
   };
 
