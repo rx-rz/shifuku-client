@@ -1,16 +1,18 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useBookingStore } from "src/store/useBookingStore";
 import { Booking, UserAuthProps } from "src/types";
 
 const user = JSON.parse(localStorage.getItem("user")!);
 const userData: UserAuthProps = user;
 
 export const useAcceptBooking = () => {
+  const acceptBookingStore = useBookingStore((state) => state.acceptBooking);
   const acceptBooking = async (props: {
     id: string;
     roomId: string;
   }): Promise<Booking> => {
-    const {data} = await axios.patch(
+    const { data } = await axios.patch(
       `${process.env.REACT_APP_LIVE_URL}/bookings/${props.id}`,
       {
         bookingStatus: "approved",
@@ -24,17 +26,14 @@ export const useAcceptBooking = () => {
     return data;
   };
   const queryClient = useQueryClient();
-  const queryData = useQuery(["bookings"]).data;
 
   const onError = () => {
-    // console.log(queryData)
-  }
-  const onSuccess = () => {
-    // console.log(queryData)
+  
+  };
+
+  const onSuccess = (data: Booking) => {
     queryClient.invalidateQueries(["bookings"]).then(() => {
-      console.log(queryData)
-      // sessionStorage.setItem("bookings", JSON.stringify(queryData));
-      // window.location.reload();
+      acceptBookingStore(data._id);
     });
   };
 
