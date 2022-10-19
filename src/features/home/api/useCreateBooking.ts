@@ -19,13 +19,15 @@ type BookingFormProps = {
 export const useCreateBooking = () => {
   const queryClient = useQueryClient();
   const [error, setError] = useState<any>("");
-  const queryData = useQuery(["booking"]).data;
+  const queryData = useQuery(["bookings"]).data;
   const createBooking = async (data: BookingFormProps) => {
     const response = await axios.post(`${process.env.REACT_APP_LIVE_URL}/bookings`, data);
     return response.data;
   };
 
+  console.log(queryData)
   const onSuccess = () => {
+    
     queryClient.invalidateQueries(["bookings"]).then(() => {
       sessionStorage.setItem("bookings", JSON.stringify(queryData));
       window.location.pathname = "/";

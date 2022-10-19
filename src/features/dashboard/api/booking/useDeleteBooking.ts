@@ -15,15 +15,15 @@ export const useDeleteBooking = () => {
   };
 
   const queryClient = useQueryClient();
-  const queryData = useQuery(["bookings"]).data;
+  // const queryData = useQuery(["bookings"]).data;
 
   const onSuccess = () => {
     queryClient.invalidateQueries(["bookings"]).then(() => {
-      sessionStorage.setItem("bookings", JSON.stringify(queryData));
+      // sessionStorage.setItem("bookings", JSON.stringify(queryData));
       if (window.location.pathname !== "/dashboard/bookings") {
-        window.location.pathname = "/dashboard/bookings";
+        // window.location.pathname = "/dashboard/bookings";
       } else {
-        window.location.reload();
+        // window.location.reload();
       }
     });
   };

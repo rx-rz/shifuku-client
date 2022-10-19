@@ -27,7 +27,7 @@ export const useCreateRoom = () => {
       .then(() => {
         sessionStorage.setItem("rooms", JSON.stringify(roomData));
       })
-      .then(() => (window.location.pathname = "/dashboard/rooms"));
+      // .then(() => (window.location.pathname = "/dashboard/rooms"));
   };
 
   const onError = (err: any) => {};

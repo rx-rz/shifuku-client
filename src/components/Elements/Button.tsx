@@ -10,6 +10,8 @@ type ButtonProps = {
 const variants = {
   primary:
     "border-secondary text-lg text-white font-medium bg-secondary border w-fit mt-4 p-2 bg-primary disabled:opacity-80 transition-shadow duration-300 hover:shadow-xl shadow-black",
+  optimistic:
+    "bg-green-600 p-2 text-white hover:shadow-xl transition-shadow shadow-black duration-300 disabled:opacity-50",
   secondary:
     "border-secondary border bg-white w-fit  px-2 md:p-2 hover:bg-secondary hover:text-white mt-2 transition-colors duration-300",
   tertiary:

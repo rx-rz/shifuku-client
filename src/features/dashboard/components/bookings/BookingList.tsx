@@ -154,7 +154,7 @@ export const BookingList = () => {
                       {booking.bookingStatus === "pending" && (
                         <td>
                           <Button
-                            variant="listprimary"
+                            variant="optimistic"
                             handleClick={() =>
                               handleApproval(booking._id, booking.roomId)
                             }

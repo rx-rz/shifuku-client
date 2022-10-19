@@ -10,8 +10,8 @@ export const useAcceptBooking = () => {
     id: string;
     roomId: string;
   }): Promise<Booking> => {
-    const response = await axios.patch(
-        `${process.env.LIVE_URL}/bookings/${props.id}`,
+    const {data} = await axios.patch(
+      `${process.env.REACT_APP_LIVE_URL}/bookings/${props.id}`,
       {
         bookingStatus: "approved",
       },
@@ -21,19 +21,24 @@ export const useAcceptBooking = () => {
         },
       }
     );
-    return response.data;
+    return data;
   };
   const queryClient = useQueryClient();
   const queryData = useQuery(["bookings"]).data;
 
+  const onError = () => {
+    // console.log(queryData)
+  }
   const onSuccess = () => {
+    // console.log(queryData)
     queryClient.invalidateQueries(["bookings"]).then(() => {
-      sessionStorage.setItem("bookings", JSON.stringify(queryData));
-      window.location.reload();
+      console.log(queryData)
+      // sessionStorage.setItem("bookings", JSON.stringify(queryData));
+      // window.location.reload();
     });
   };
 
-  const mutation = useMutation(acceptBooking, { onSuccess });
+  const mutation = useMutation(acceptBooking, { onSuccess, onError });
 
   const handleSubmit = (props: { id: string; roomId: string }) => {
     mutation.mutate(props);

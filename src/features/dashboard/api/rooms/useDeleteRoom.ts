@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const useDeleteRoom = () => {
   const queryClient = useQueryClient();
-  const roomData = useQuery(["rooms"]).data;
+  // const roomData = useQuery(["rooms"]).data;
   const postRooms = async (id: string) => {
     const response = await axios.delete(`${process.env.REACT_APP_LIVE_URL}/rooms/${id}`);
     return response.data;
@@ -13,10 +13,10 @@ export const useDeleteRoom = () => {
     await queryClient.invalidateQueries(["rooms"]).then(() => {
       if (window.location.pathname !== "/dashboard/rooms") {
         window.location.pathname = "/dashboard/rooms";
-        sessionStorage.setItem("rooms", JSON.stringify(roomData));
+        // sessionStorage.setItem("rooms", JSON.stringify(roomData));
       } else {
-        sessionStorage.setItem("rooms", JSON.stringify(roomData));
-        window.location.reload();
+        // sessionStorage.setItem("rooms", JSON.stringify(roomData));
+        // window.location.reload();
       }
     });
   };

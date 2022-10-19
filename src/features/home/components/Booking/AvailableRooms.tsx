@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import React from "react";
 
@@ -16,6 +17,8 @@ type FormValueProps = {
 };
 
 export const AvailableRooms = ({ formValues }: FormValueProps) => {
+  const q = useQuery(["bookings"]).data;
+  console.log(q);
   const { rooms } = useAvailableRooms();
   const refs = rooms && rooms.map(() => React.createRef<HTMLDivElement>());
 

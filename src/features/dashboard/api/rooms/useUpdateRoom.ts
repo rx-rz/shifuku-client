@@ -6,7 +6,7 @@ const user = JSON.parse(localStorage.getItem("user")!);
 const userData: UserAuthProps = user;
 
 export const useUpdateRooms = () => {
-  const roomData = useQuery(["rooms"]).data;
+  // const roomData = useQuery(["rooms"]).data;
   const updateRoom = async (props: {
     data: Partial<Room>;
     id: string;
@@ -27,7 +27,7 @@ export const useUpdateRooms = () => {
 
   const onSuccess = () => {
     queryClient.invalidateQueries(["rooms"]).then(() => {
-      sessionStorage.setItem("rooms", JSON.stringify(roomData));
+      // sessionStorage.setItem("rooms", JSON.stringify(roomData));
       window.location.pathname = "/dashboard/rooms";
     });
   };
