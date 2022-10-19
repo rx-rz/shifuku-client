@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export const useCreateBooking = () => {
   const [error, setError] = useState<any>("");
-  const createBooking = async (data: Partial<Booking>) => {
+  const createBooking = async (data: Partial<Booking> | Booking) => {
     const response = await axios.post(`${process.env.REACT_APP_LIVE_URL}/bookings`, data);
     return response.data;
   };

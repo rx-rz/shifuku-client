@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { LinkTo, DashboardCard, Button } from "src/components";
+import { useBookingStore } from "src/store/useBookingStore";
 import { Booking } from "src/types";
 
 import { useUpdateRooms, useAcceptBooking, useListBooking } from "../../api/";
 import { bookingTypeProps, bookingSort } from "../../utils";
 
 export const BookingList = () => {
+  const storedBookings = useBookingStore((state) => state.bookings);
   const { bookings: data } = useListBooking();
   const { handleSubmit: handleBookingApproval } = useAcceptBooking();
   const { handleRoomUpdate } = useUpdateRooms();
   const [bookings, setBookings] = useState<Booking[] | undefined>(
-    data ?? JSON.parse(sessionStorage.getItem("bookings")!)
+    data ?? storedBookings
   );
 
   const handleApproval = (id: string, roomId: string) => {
