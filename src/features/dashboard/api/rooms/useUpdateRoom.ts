@@ -1,12 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useRoomStore } from "src/store/useRoomStore";
 import { Room, UserAuthProps } from "src/types";
 
 const user = JSON.parse(localStorage.getItem("user")!);
 const userData: UserAuthProps = user;
 
 export const useUpdateRooms = () => {
-  // const roomData = useQuery(["rooms"]).data;
+  const updateRoomStore = useRoomStore((state) => state.updateRoom);
   const updateRoom = async (props: {
     data: Partial<Room>;
     id: string;
@@ -25,9 +26,9 @@ export const useUpdateRooms = () => {
   };
   const queryClient = useQueryClient();
 
-  const onSuccess = () => {
+  const onSuccess = (data: Room) => {
     queryClient.invalidateQueries(["rooms"]).then(() => {
-      // sessionStorage.setItem("rooms", JSON.stringify(roomData));
+      updateRoomStore(data, data._id);
       window.location.pathname = "/dashboard/rooms";
     });
   };

@@ -26,9 +26,10 @@ export const useCreateRoom = () => {
     return response.data;
   };
 
-  const onSuccess = async (data: Room) => {
+  const onSuccess = async (data: Room[]) => {
     await queryClient.invalidateQueries(["rooms"]).then(() => {
       addRoomStore(data);
+      window.location.pathname = "/dashboard/rooms";
     });
   };
 
