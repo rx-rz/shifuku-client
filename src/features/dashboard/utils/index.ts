@@ -57,13 +57,13 @@ export const bookingSort = (
 
         setBookings(pendingBookingsSort);
         break;
-      case "approvedBookingst":
-        const approvedBookingsSort = [...bookings].filter(
-          (booking) => booking.bookingStatus === "approved"
-        );
-
-        setBookings(approvedBookingsSort);
-        break;
+        case "approvedBookings":
+          const approvedBookingsSort = [...bookings].filter(
+            (booking) => booking.bookingStatus === "approved"
+          );
+  
+          setBookings(approvedBookingsSort);
+          break;
     }
   }
 };

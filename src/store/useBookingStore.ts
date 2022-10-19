@@ -2,13 +2,13 @@ import { Booking } from "src/types";
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-interface BookingState {
+type BookingState = {
   bookings: Booking[];
   addBooking: (booking: Booking) => void;
   deleteBooking: (id: string) => void;
   acceptBooking: (id: string) => void;
   setBookings: (bookings: Booking[]) => void;
-}
+};
 
 export const useBookingStore = create<BookingState>()(
   devtools(

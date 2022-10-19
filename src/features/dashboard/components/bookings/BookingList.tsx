@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { LinkTo, DashboardCard, Button } from "src/components";
 import { useBookingStore } from "src/store/useBookingStore";
 import { Booking } from "src/types";
-
 import { useUpdateRooms, useAcceptBooking, useListBooking } from "../../api/";
 import { bookingTypeProps, bookingSort } from "../../utils";
 
@@ -32,7 +31,7 @@ export const BookingList = () => {
   return (
     <div>
       <>
-        {bookings && (
+        {bookings && data && (
           <>
             <div className="bg-secondary py-16">
               <div className="w-9/12 mx-auto">
@@ -40,17 +39,14 @@ export const BookingList = () => {
                   Bookings
                 </h1>
                 <div className=" flex justify-between flex-wrap">
+                  <DashboardCard details={data.length} name="Total Bookings:" />
                   <DashboardCard
-                    details={bookings.length}
-                    name="Total Bookings:"
-                  />
-                  <DashboardCard
-                    details={(bookings.length / 12).toFixed(2)}
+                    details={(data.length / 12).toFixed(2)}
                     name="Net Bookings:"
                   />
                   <DashboardCard
                     details={
-                      bookings.filter(
+                      data.filter(
                         (booking) => booking.bookingStatus === "pending"
                       ).length
                     }
@@ -73,11 +69,7 @@ export const BookingList = () => {
                         <Button
                           variant="primary"
                           handleClick={() =>
-                            bookingSort(
-                              bookings,
-                              setBookings,
-                              "pendingBookings"
-                            )
+                            bookingSort(data, setBookings, "pendingBookings")
                           }
                         >
                           Pending Bookings
@@ -86,20 +78,22 @@ export const BookingList = () => {
                           variant="primary"
                           className="ml-4"
                           handleClick={() =>
-                            bookingSort(
-                              bookings,
-                              setBookings,
-                              "approvedBookings"
-                            )
+                            bookingSort(data, setBookings, "approvedBookings")
                           }
                         >
                           Approved Bookings
                         </Button>
                         <details className="relative bg-white">
-                          <summary className="p-2 border-secondary border-2 ml-4 shadow-sm shadow-black text-secondary">
+                          <summary
+                            className="p-2 border-secondary border-2 ml-4
+                           shadow-sm shadow-black text-secondary"
+                          >
                             Sort
                           </summary>
-                          <div className="border border-secondary absolute z-50 ml-4 w-52 bg-white">
+                          <div
+                            className="border border-secondary 
+                          absolute z-50 ml-4 w-52 bg-white"
+                          >
                             {bookingTypeProps.map((typeProp) => (
                               <React.Fragment key={typeProp.name}>
                                 <Button
@@ -123,7 +117,10 @@ export const BookingList = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr className=" w-full text-left text-md lg:text-xl  opacity-80 text-secondary font-medium">
+                  <tr
+                    className=" w-full text-left text-md lg:text-xl  
+                  opacity-80 text-secondary font-medium"
+                  >
                     <th>N/O</th>
                     <th>Customer Name</th>
                     <th>Check In</th>
@@ -134,7 +131,10 @@ export const BookingList = () => {
                     <th>Price</th>
                   </tr>
                 </thead>
-                <tbody className="text-md  lg:text-xl py-4 table-row-group font-medium opacity-70">
+                <tbody
+                  className="text-md  lg:text-xl py-4
+                 table-row-group font-medium opacity-70"
+                >
                   {bookings.map((booking, index) => (
                     <tr key={booking._id}>
                       <td>{index + 1}</td>
