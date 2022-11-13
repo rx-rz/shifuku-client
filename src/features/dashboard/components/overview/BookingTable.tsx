@@ -1,15 +1,15 @@
 import { LinkTo } from "src/components";
-import { useListBooking } from "../../api";
+import { useBookingStore } from "src/store/useBookingStore";
 
 export const BookingTable = () => {
-  const { bookings } = useListBooking();
+  const bookings = useBookingStore((state) => state.bookings);
 
   const latestBookings =
     bookings &&
     bookings
       .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
       .slice(0, 8)
-      .filter((booking) => (booking.bookingStatus = "pending"));
+      .filter((booking) => (booking.bookingStatus === "pending"));
 
   const setDate = (timestamp: string) => {
     const date = new Date(timestamp)

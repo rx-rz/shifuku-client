@@ -14,14 +14,14 @@ export const BookingPage = () => {
 
   return (
     <DefaultLayout>
-      <div className="min-h-screen flex flex-wrap">
+      <div className="min-h-screen flex flex-wrap relative">
         <div className="lg:w-4/12 w-full">
           <AvailabilityForm setFormValues={setFormValues} />
         </div>
         <div className="lg:w-5/12 w-full lg:block">
           <AvailableRooms formValues={formValues} />
         </div>
-        <div className="lg:w-3/12 hidden lg:block">
+        <div className="lg:w-3/12 hidden lg:block  right-0">
           <FallbackImage
             alt=""
             className="object-cover h-screen"

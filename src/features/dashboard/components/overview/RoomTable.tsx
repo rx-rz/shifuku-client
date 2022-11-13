@@ -1,8 +1,8 @@
 import { LinkTo } from "src/components";
-import { useListRooms } from "../../api";
+import { useRoomStore } from "src/store/useRoomStore";
 
 export const RoomTable = () => {
-  const { data: rooms } = useListRooms();
+  const rooms = useRoomStore((state) => state.rooms);
 
   const availableRooms =
     rooms &&
@@ -17,12 +17,16 @@ export const RoomTable = () => {
         <p className="text-2xl font-bold opacity-90">Available Rooms</p>
         <LinkTo
           to="/dashboard/rooms"
-          className="p-2  bg-secondary shadow-sm shadow-black text-white"
+          className="p-2  bg-secondary shadow-sm
+      shadow-black text-white"
         >
           View Rooms
         </LinkTo>
       </div>
-      <table className="border-separate border-spacing-y-8 w-full my-6 opacity-90">
+      <table
+        className="border-separate border-spacing-y-8
+       w-full my-6 opacity-90"
+      >
         <thead className="text-left">
           <tr className="text-xl">
             <th>Room Number</th>

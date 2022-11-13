@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, InputField } from "src/components";
+import { Button, Form, InputField, LinkTo } from "src/components";
 
 type AvailabilityFormProps = {
   setFormValues: React.Dispatch<
@@ -41,7 +41,8 @@ export const AvailabilityForm = ({ setFormValues }: AvailabilityFormProps) => {
       {({ register, formState }) => (
         <>
           <div className="lg:w-9/12 w-11/12  mx-auto  mt-8 justify-center items-center font-general_sans">
-            <h1 className="text-3xl font-medium">Parameters</h1>
+            <LinkTo to="/" className="text-2xl font-medium opacity-90 ">&#8592; Home</LinkTo>
+            <h1 className="text-3xl mt-4 font-medium">Parameters</h1>
             <div className="my-8">
               <InputField
                 variant="primary"

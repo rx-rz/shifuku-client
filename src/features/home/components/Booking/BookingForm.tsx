@@ -1,4 +1,5 @@
 import { Button, Form, InputField } from "src/components";
+import { useUpdateRooms } from "src/features/dashboard/api";
 import { useCreateBooking } from "../../api";
 
 type BookingFormProps = {
@@ -26,22 +27,32 @@ export const BookingForm = ({
   BookingFormProps,
   "customerName" | "customerPhoneNo" | "bookingStatus"
 >) => {
-  const { handleSubmit } = useCreateBooking();
+  const { handleSubmit: handleBookingSubmit } = useCreateBooking();
+  const { handleRoomUpdate } = useUpdateRooms();
+
+  const handleSubmit = (booking: BookingFormProps, roomId: string) => {
+    handleBookingSubmit(booking);
+    handleRoomUpdate({ data: { roomStatus: "pending" }, id: roomId });
+   
+  };
 
   return (
     <Form
       onSubmit={(data: BookingFormProps) =>
-        handleSubmit({
-          ...data,
-          checkIn,
-          checkOut,
-          bookingStatus: "pending",
-          bookingPrice,
-          noOfGuests,
-          roomNo,
-          roomId,
-          roomType,
-        })
+        handleSubmit(
+          {
+            ...data,
+            checkIn,
+            checkOut,
+            bookingStatus: "pending",
+            bookingPrice,
+            noOfGuests,
+            roomNo,
+            roomId,
+            roomType,
+          },
+          roomId
+        )
       }
       options={{ mode: "onBlur" }}
       className=""

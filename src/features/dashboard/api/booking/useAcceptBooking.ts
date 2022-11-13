@@ -36,7 +36,10 @@ export const useAcceptBooking = () => {
     acceptBookingStore(data._id);
     successToast("Booking accepted.");
     queryClient.invalidateQueries(["bookings"]).then(() => {
-      setTimeout(() => window.location.reload, 1500);
+      setTimeout(
+        () => (window.location.pathname = "/dashboard/bookings"),
+        1500
+      );
     });
   };
 

@@ -15,8 +15,9 @@ export const BookingList = () => {
   );
 
   const handleApproval = (id: string, roomId: string) => {
-    handleBookingApproval({ id, roomId });
     handleRoomUpdate({ data: { roomStatus: "active" }, id: roomId });
+    handleBookingApproval({ id, roomId });
+
   };
 
   const setDate = (timestamp: string) => {

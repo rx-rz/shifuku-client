@@ -11,7 +11,7 @@ type RoomFormProps = {
   roomUrl: string;
   roomPrice: number;
   roomNumber?: number;
-  roomStatus: "active" | "inactive";
+  roomStatus: "active" | "inactive" | "pending";
 };
 
 export const useCreateRoom = () => {

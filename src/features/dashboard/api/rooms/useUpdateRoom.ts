@@ -30,8 +30,10 @@ export const useUpdateRooms = () => {
   const onSuccess = (data: Room) => {
     queryClient.invalidateQueries(["rooms"]).then(() => {
       updateRoomStore(data, data._id);
-      successToast("Room sucessfully updated");
-      setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 1500);
+      if (window.location.pathname !== "/booking" || "/dashboard/bookings") {
+        successToast("Room sucessfully updated");
+        setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 1500);
+      }
     });
   };
 

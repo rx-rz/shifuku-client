@@ -6,7 +6,7 @@ type Room = {
   _id: string;
   roomUrl: string;
   roomPrice: number;
-  roomStatus: "active" | "not in use";
+  roomStatus: "active" | "inactive" | "pending";
   roomType: "Shizukana" | "Yorokobi" | "Hofu" | "Kofuku";
 };
 
@@ -20,8 +20,6 @@ export const useAvailableRooms = () => {
     ["rooms"],
     fetchRooms
   );
-  const rooms = data && data.filter((data) => data.roomStatus !== "active");
-  console.log(rooms);
-
+  const rooms = data && data.filter((data) => data.roomStatus === "inactive");
   return { rooms, isError, isLoading, error, isFetching };
 };
