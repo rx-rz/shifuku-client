@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import { lazily } from "react-lazily";
+import { Toaster } from "react-hot-toast";
 import { HomePage } from "src/features";
 
 const {
@@ -26,7 +27,6 @@ const defaultRoutes = [
 ];
 
 const authRoutes = [
-
   { path: "/dashboard", element: <Overview /> },
   { path: "/dashboard/bookings", element: <Bookings /> },
   { path: "/dashboard/rooms", element: <Rooms /> },
@@ -39,5 +39,21 @@ const routes = user ? [...defaultRoutes, ...authRoutes] : [...defaultRoutes];
 
 export const AppRoutes = () => {
   const element = useRoutes([...routes]);
-  return <Suspense fallback={<p>Loading...</p>}>{element}</Suspense>;
+  return (
+    <Suspense
+      fallback={
+        <div
+          className="font-general_sans text-xl font-medium
+          opacity-80 flex items-center justify-center h-screen"
+        >
+          <p>Loading...</p>
+        </div>
+      }
+    >
+      <div>
+        <Toaster />
+      </div>
+      <main>{element}</main>
+    </Suspense>
+  );
 };

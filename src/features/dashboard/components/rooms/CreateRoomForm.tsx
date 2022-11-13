@@ -9,6 +9,7 @@ export const CreateRoomForm = () => {
     noOfRooms: string;
     roomUrl: string;
     roomPrice: number;
+    roomStatus: "active" | "inactive"
   };
 
   const roomNames = ["Yorokobi", "Hofu", "Shizukana", "Kofuku"];

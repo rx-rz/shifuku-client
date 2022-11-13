@@ -26,9 +26,8 @@ export const BookingForm = ({
   BookingFormProps,
   "customerName" | "customerPhoneNo" | "bookingStatus"
 >) => {
-
   const { handleSubmit } = useCreateBooking();
-  
+
   return (
     <Form
       onSubmit={(data: BookingFormProps) =>
@@ -60,11 +59,16 @@ export const BookingForm = ({
           />
           <InputField
             variant="secondary"
-            type="number"
+            type="text"
             label="Phone Number"
             error={formState.errors["customerPhoneNo"]}
             registration={register("customerPhoneNo", {
               required: "Please input a phone number.",
+              pattern: {
+                value:
+                  /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im,
+                message: "Please enter the correct phone number",
+              },
             })}
           />
           <Button variant="primary">Submit</Button>

@@ -3,7 +3,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 type InputFieldProps = FieldWrapperPassThroughProps & {
   className?: string;
-  type: "text" | "email" | "password" | "number" | "date" | "datetime-local";
+  type: "text" | "email" | "password" | "number" | "date" | "datetime-local" | "tel";
   placeHolder?: string;
   variant?: keyof typeof variants;
   registration: Partial<UseFormRegisterReturn>;

@@ -47,6 +47,7 @@ export const AvailabilityForm = ({ setFormValues }: AvailabilityFormProps) => {
                 variant="primary"
                 type="datetime-local"
                 label="Check In Date"
+                
                 error={formState.errors["checkInDate"]}
                 registration={register("checkInDate", {
                   required: "Please choose a check in date.",

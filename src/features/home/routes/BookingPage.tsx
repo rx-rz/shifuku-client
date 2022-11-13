@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FallbackImage, DefaultLayout } from "src/components";
 import { AvailableRooms, AvailabilityForm } from "../components/";
-
 export const BookingPage = () => {
   window.scrollTo(0, 0);
 

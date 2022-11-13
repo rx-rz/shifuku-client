@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import React from "react";
 
@@ -17,9 +16,7 @@ type FormValueProps = {
 };
 
 export const AvailableRooms = ({ formValues }: FormValueProps) => {
-  const q = useQuery(["bookings"]).data;
-  console.log(q);
-  const { rooms } = useAvailableRooms();
+  const { rooms, isLoading, isError } = useAvailableRooms();
   const refs = rooms && rooms.map(() => React.createRef<HTMLDivElement>());
 
   const handleFormToggle = (index: number) => {
@@ -33,6 +30,40 @@ export const AvailableRooms = ({ formValues }: FormValueProps) => {
       "days"
     );
 
+  if (rooms?.length === 0) {
+    return (
+      <main
+        className="h-screen w-full grid place-content-center
+           font-general_sans font-medium opacity-80"
+      >
+        <p>
+          There are no available rooms at this period. Please try again some
+          other time.
+        </p>
+      </main>
+    );
+  }
+  if (isLoading) {
+    return (
+      <main
+        className="h-screen w-full grid place-content-center
+         font-general_sans font-medium opacity-80"
+      >
+        <p>Loading...</p>
+      </main>
+    );
+  }
+
+  if (isError) {
+    return (
+      <main
+        className="h-screen w-full grid place-content-center
+         font-general_sans font-medium opacity-80"
+      >
+        <p>An error occured. Please reload the page and try again.</p>
+      </main>
+    );
+  }
   return (
     <div
       className="lg:w-9/12 w-11/12  mx-auto  mt-8 justify-center

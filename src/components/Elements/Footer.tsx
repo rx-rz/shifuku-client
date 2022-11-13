@@ -1,3 +1,5 @@
+import { LinkTo } from "./LinkTo";
+
 export const Footer = () => {
   return (
     <div className="w-full bg-secondary mx-auto pb-48 pt-48 flex text-white">
@@ -28,30 +30,30 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col md:ml-16 font-boska font-medium mt-12 md:mt-0">
-          <a
-            href="/"
+          <LinkTo
+            to="/rooms/shizukana"
             className="text-3xl my-4  "
           >
             Shizukana ↗
-          </a>
-          <a
-            href="/"
+          </LinkTo>
+          <LinkTo
+            to="/rooms/yorokobi"
             className="text-3xl my-4 "
           >
             Yorokobi ↗
-          </a>
-          <a
-            href="/"
+          </LinkTo>
+          <LinkTo
+            to="/rooms/kofuku"
             className="text-3xl my-4 "
           >
             Kofuku ↗
-          </a>
-          <a
-            href="/"
+          </LinkTo>
+          <LinkTo
+            to="/rooms/hofu"
             className="text-3xl my-4 "
           >
             Hofu ↗
-          </a>
+          </LinkTo>
           <a
             href="/"
             className="text-3xl my-4 "

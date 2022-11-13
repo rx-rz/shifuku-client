@@ -18,6 +18,7 @@ export const useAvailableRooms = () => {
 
   const { data, isError, isLoading, error } = useQuery(["rooms"], fetchRooms);
   const rooms = data && data.filter((data) => data.roomStatus !== "active");
+  console.log(rooms)
 
   return { rooms, isError, isLoading, error };
 };

@@ -10,6 +10,7 @@ type RoomFormProps = {
   roomUrl: string;
   roomPrice: number;
   roomNumber?: number;
+  roomStatus: "active" | "inactive";
 };
 
 export const useCreateRoom = () => {
@@ -19,6 +20,7 @@ export const useCreateRoom = () => {
   const noOfRooms = rooms && rooms?.length + 1;
 
   const postRooms = async (data: Omit<RoomFormProps, "noOfRooms">) => {
+    console.log(data);
     const response = await axios.post(
       `${process.env.REACT_APP_LIVE_URL}/rooms`,
       { ...data }
@@ -33,7 +35,9 @@ export const useCreateRoom = () => {
     });
   };
 
-  const onError = (err: any) => {};
+  const onError = (err: any) => {
+    console.log(err);
+  };
 
   const mutation = useMutation(postRooms);
 
@@ -59,7 +63,12 @@ export const useCreateRoom = () => {
       }
 
       mutation.mutate(
-        { ...data, roomNumber: i!, roomUrl: data.roomUrl },
+        {
+          ...data,
+          roomNumber: i!,
+          roomUrl: data.roomUrl,
+          roomStatus: "inactive",
+        },
         { onSuccess, onError }
       );
     }
