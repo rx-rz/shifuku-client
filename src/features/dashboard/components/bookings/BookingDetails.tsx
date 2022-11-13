@@ -24,6 +24,8 @@ export const BookingDetails = () => {
     handleRoomUpdate({ data: { roomStatus: "active" }, id: roomId });
   };
 
+  
+
   return (
     <div className="min-h-screen py-16 bg-secondary">
       <div className=" w-10/12 mx-auto font-general_sans ">
@@ -32,14 +34,14 @@ export const BookingDetails = () => {
             Booking Details
           </h1>
           {booking && (
-            <>
+            <div className="flex">
               {booking.bookingStatus === "pending" && (
                 <Button
                   handleClick={() =>
                     handleApproval(booking._id, booking.roomId)
                   }
                   variant="listprimary"
-                  className="h-14 text-xl font-medium"
+                  className="h-14 text-xl font-medium border  mr-4"
                 >
                   Approve
                 </Button>
@@ -52,7 +54,7 @@ export const BookingDetails = () => {
               >
                 Delete
               </Button>
-            </>
+            </div>
           )}
         </div>
         {booking && !isLoading && (
