@@ -29,7 +29,7 @@ export type Booking = {
 export type Room = {
   _id: string;
   roomNumber: number;
-  roomStatus: "active" | "not in use";
+  roomStatus: "active" | "inactive";
   roomPrice: number;
   roomType: "Shizukana" | "Yorokobi" | "Hofu" | "Kofuku";
 };

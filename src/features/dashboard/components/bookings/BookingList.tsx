@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { LinkTo, DashboardCard, Button } from "src/components";
 import { useBookingStore } from "src/store/useBookingStore";
 import { Booking } from "src/types";
-import { useUpdateRooms, useAcceptBooking, useListBooking } from "../../api/";
+import { useUpdateRooms, useAcceptBooking } from "../../api/";
 import { bookingTypeProps, bookingSort } from "../../utils";
 
 export const BookingList = () => {
   const storedBookings = useBookingStore((state) => state.bookings);
-  const { bookings: data } = useListBooking();
+
   const { handleSubmit: handleBookingApproval } = useAcceptBooking();
   const { handleRoomUpdate } = useUpdateRooms();
   const [bookings, setBookings] = useState<Booking[] | undefined>(
-    data ?? storedBookings
+    storedBookings
   );
 
   const handleApproval = (id: string, roomId: string) => {
@@ -31,7 +31,7 @@ export const BookingList = () => {
   return (
     <div>
       <>
-        {bookings && data && (
+        {bookings && (
           <>
             <div className="bg-secondary py-16">
               <div className="w-9/12 mx-auto">
@@ -39,14 +39,17 @@ export const BookingList = () => {
                   Bookings
                 </h1>
                 <div className=" flex justify-between flex-wrap">
-                  <DashboardCard details={data.length} name="Total Bookings:" />
                   <DashboardCard
-                    details={(data.length / 12).toFixed(2)}
+                    details={bookings.length}
+                    name="Total Bookings:"
+                  />
+                  <DashboardCard
+                    details={(bookings.length / 12).toFixed(2)}
                     name="Net Bookings:"
                   />
                   <DashboardCard
                     details={
-                      data.filter(
+                      bookings.filter(
                         (booking) => booking.bookingStatus === "pending"
                       ).length
                     }
@@ -69,7 +72,11 @@ export const BookingList = () => {
                         <Button
                           variant="primary"
                           handleClick={() =>
-                            bookingSort(data, setBookings, "pendingBookings")
+                            bookingSort(
+                              storedBookings,
+                              setBookings,
+                              "pendingBookings"
+                            )
                           }
                         >
                           Pending Bookings
@@ -78,7 +85,11 @@ export const BookingList = () => {
                           variant="primary"
                           className="ml-4"
                           handleClick={() =>
-                            bookingSort(data, setBookings, "approvedBookings")
+                            bookingSort(
+                              storedBookings,
+                              setBookings,
+                              "approvedBookings"
+                            )
                           }
                         >
                           Approved Bookings

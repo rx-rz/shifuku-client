@@ -1,11 +1,11 @@
 import { DashboardCard } from "src/components";
-
-import { useListBooking, useListRooms } from "../../api";
+import { useBookingStore } from "src/store/useBookingStore";
+import { useRoomStore } from "src/store/useRoomStore";
 
 export const TopCards = () => {
   const { user } = JSON.parse(localStorage.getItem("user")!);
-  const { bookings } = useListBooking();
-  const { data: rooms } = useListRooms();
+  const bookings = useBookingStore((state) => state.bookings);
+  const rooms = useRoomStore((state) => state.rooms);
   let income = 0;
   let availableRooms: string[] = [];
   if (bookings) {
@@ -15,7 +15,7 @@ export const TopCards = () => {
   }
   if (rooms) {
     for (let i = 0; i < rooms.length; i++) {
-      if (rooms[i].roomStatus === "not in use") {
+      if (rooms[i].roomStatus === "inactive") {
         availableRooms.push(rooms[i].roomStatus);
       }
     }

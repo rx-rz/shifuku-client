@@ -16,7 +16,7 @@ type FormValueProps = {
 };
 
 export const AvailableRooms = ({ formValues }: FormValueProps) => {
-  const { rooms, isLoading, isError } = useAvailableRooms();
+  const { rooms, isLoading, isError, isFetching } = useAvailableRooms();
   const refs = rooms && rooms.map(() => React.createRef<HTMLDivElement>());
 
   const handleFormToggle = (index: number) => {
@@ -43,7 +43,7 @@ export const AvailableRooms = ({ formValues }: FormValueProps) => {
       </main>
     );
   }
-  if (isLoading) {
+  if (isLoading && isFetching) {
     return (
       <main
         className="h-screen w-full grid place-content-center

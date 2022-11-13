@@ -60,7 +60,7 @@ export const useCreateBooking = () => {
       .then(() => {
         successToast();
       });
-
+    setTimeout(() => window.location.pathname === "/", 1500);
   };
 
   const onError = (err: any) => {
