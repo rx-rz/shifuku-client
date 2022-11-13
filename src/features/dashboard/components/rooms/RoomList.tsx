@@ -6,7 +6,7 @@ import { useRoomStore } from "src/store/useRoomStore";
 export const RoomList = () => {
   const { data } = useListRooms();
   const roomStore = useRoomStore((state) => state.rooms);
-  const { handleRoomDelete } = useDeleteRoom();
+  const { handleRoomDelete, mutation } = useDeleteRoom();
 
   const [rooms, setRooms] = useState<Room[]>(
     roomStore.sort((a, b) => a.roomNumber - b.roomNumber)
@@ -138,6 +138,7 @@ export const RoomList = () => {
                           <Button
                             variant="listsecondary"
                             handleClick={() => handleRoomDelete(room._id)}
+                            loading={mutation.isLoading}
                           >
                             Delete
                           </Button>

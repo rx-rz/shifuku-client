@@ -2,26 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRoomStore } from "src/store/useRoomStore";
 import { Room } from "src/types";
-import { toast } from "react-hot-toast";
+import { errorToast, successToast } from "src/utils/toasts";
 
-const successToast = () =>
-  toast.success("Room deleted successfully.", {
-    duration: 2500,
-    position: "top-center",
-    style: {
-      border: "1px solid purple",
-      backgroundColor: "white",
-    },
-  });
-const errorToast = () =>
-  toast.error("An error occured. Please try again.", {
-    duration: 2500,
-    position: "top-center",
-    style: {
-      border: "1px solid purple",
-      backgroundColor: "white",
-    },
-  });
 
 export const useDeleteRoom = () => {
   const queryClient = useQueryClient();
@@ -36,13 +18,13 @@ export const useDeleteRoom = () => {
   const onSuccess = async (data: Room) => {
     deleteRoomStore(data._id);
     await queryClient.invalidateQueries(["rooms"]).then(() => {
-      successToast();
-      setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 3000);
+      successToast("Room deleted sucessfully");
+      setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 1500);
     });
   };
 
   const onError = () => {
-    errorToast();
+    errorToast("An error occured. Please try again.");
   };
 
   const mutation = useMutation(postRooms, { onSuccess, onError });

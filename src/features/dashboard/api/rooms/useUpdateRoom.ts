@@ -1,30 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { toast } from "react-hot-toast";
 import { useRoomStore } from "src/store/useRoomStore";
 import { Room, UserAuthProps } from "src/types";
+import { errorToast, successToast } from "src/utils/toasts";
 
 const user = JSON.parse(localStorage.getItem("user")!);
 const userData: UserAuthProps = user;
-
-const successToast = () =>
-  toast.success("Room sucessfully updated made successfully.", {
-    duration: 2500,
-    position: "top-center",
-    style: {
-      border: "1px solid purple",
-      backgroundColor: "white",
-    },
-  });
-const errorToast = () =>
-  toast.error("An error occured. Please try again.", {
-    duration: 2500,
-    position: "top-center",
-    style: {
-      border: "1px solid purple",
-      backgroundColor: "white",
-    },
-  });
 
 export const useUpdateRooms = () => {
   const updateRoomStore = useRoomStore((state) => state.updateRoom);
@@ -49,13 +30,13 @@ export const useUpdateRooms = () => {
   const onSuccess = (data: Room) => {
     queryClient.invalidateQueries(["rooms"]).then(() => {
       updateRoomStore(data, data._id);
-      successToast();
-      setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 3000);
+      successToast("Room sucessfully updated");
+      setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 1500);
     });
   };
 
   const onError = () => {
-    errorToast();
+    errorToast("An error occured. Please try again.");
   };
 
   const mutation = useMutation(updateRoom, { onError, onSuccess });

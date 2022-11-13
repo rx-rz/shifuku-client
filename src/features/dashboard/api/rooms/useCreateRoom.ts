@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRoomStore } from "src/store/useRoomStore";
 import { Room } from "src/types";
+import { errorToast, successToast } from "src/utils/toasts";
 import { useListRooms } from "./useListRoom";
 
 type RoomFormProps = {
@@ -20,7 +21,6 @@ export const useCreateRoom = () => {
   const noOfRooms = rooms && rooms?.length + 1;
 
   const postRooms = async (data: Omit<RoomFormProps, "noOfRooms">) => {
-    console.log(data);
     const response = await axios.post(
       `${process.env.REACT_APP_LIVE_URL}/rooms`,
       { ...data }
@@ -29,14 +29,15 @@ export const useCreateRoom = () => {
   };
 
   const onSuccess = async (data: Room[]) => {
+    addRoomStore(data);
+    successToast("Room created successfully.");
     await queryClient.invalidateQueries(["rooms"]).then(() => {
-      addRoomStore(data);
-      window.location.pathname = "/dashboard/rooms";
+      setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 1500);
     });
   };
 
-  const onError = (err: any) => {
-    console.log(err);
+  const onError = () => {
+    errorToast("An error occured. Please try again.");
   };
 
   const mutation = useMutation(postRooms);
