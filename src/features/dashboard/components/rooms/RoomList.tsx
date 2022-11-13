@@ -9,9 +9,7 @@ export const RoomList = () => {
   const { handleRoomDelete } = useDeleteRoom();
 
   const [rooms, setRooms] = useState<Room[]>(
-    data
-      ? data.sort((a, b) => a.roomNumber - b.roomNumber)
-      : roomStore.sort((a, b) => a.roomNumber - b.roomNumber)
+    roomStore.sort((a, b) => a.roomNumber - b.roomNumber)
   );
 
   const roomSort = (a: "roomNumber" | "roomPrice" | "roomType") => {
