@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import  { useState, Fragment } from "react";
 import { useListRooms, useDeleteRoom } from "../../api/";
 import { Button, LinkTo, DashboardCard } from "src/components";
 import { Room } from "src/types";
 import { useRoomStore } from "src/store/useRoomStore";
+
 export const RoomList = () => {
   const { data } = useListRooms();
   const roomStore = useRoomStore((state) => state.rooms);
@@ -121,7 +122,7 @@ export const RoomList = () => {
                 </thead>
                 <tbody className="  text-xl py-4 table-row-group font-medium opacity-70">
                   {rooms.map((room) => (
-                    <React.Fragment key={room.roomNumber}>
+                    <Fragment key={room.roomNumber}>
                       <tr>
                         <td>{room.roomNumber}</td>
                         <td className="capitalize">{room.roomStatus}</td>
@@ -144,7 +145,7 @@ export const RoomList = () => {
                           </Button>
                         </td>
                       </tr>
-                    </React.Fragment>
+                    </Fragment>
                   ))}
                 </tbody>
               </table>

@@ -1,6 +1,4 @@
-import { Button, LinkTo } from "src/components";
-import { Form } from "src/components/Form/Form";
-import { InputField } from "src/components/Form/InputField";
+import { Button, LinkTo, Form, InputField } from "src/components";
 import { useSignup } from "../api/useSignup";
 
 type SignupProps = {

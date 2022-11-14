@@ -1,5 +1,5 @@
 import { LinkTo } from "src/components";
-import { useRoomStore } from "src/store/useRoomStore";
+import { useRoomStore } from "src/store";
 
 export const RoomTable = () => {
   const rooms = useRoomStore((state) => state.rooms);

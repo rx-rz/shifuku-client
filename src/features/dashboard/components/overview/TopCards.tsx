@@ -1,6 +1,5 @@
 import { DashboardCard } from "src/components";
-import { useBookingStore } from "src/store/useBookingStore";
-import { useRoomStore } from "src/store/useRoomStore";
+import { useBookingStore, useRoomStore } from "src/store";
 
 export const TopCards = () => {
   const { user } = JSON.parse(localStorage.getItem("user")!);

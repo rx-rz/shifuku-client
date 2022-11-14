@@ -22,10 +22,13 @@ export const BottomSection = () => {
                 className="font-boska text-3xl xl:text-6xl lg:text-5xl
               md:text-4xl font-medium my-4 text-center"
               >
-                The line of sight is right. At our laid back hotel in {" "}
+                The line of sight is right. At our laid back hotel in{" "}
                 <span className="underline decoration-secondary">Okinawa.</span>
               </h1>
-              <h2 className="font-general_sans opacity-70 xl:text-2xl  text-md mb-24 lg:mb-0 lg:my-8 ">
+              <h2
+                className="font-general_sans opacity-70 
+              xl:text-2xl  text-md mb-24 lg:mb-0 lg:my-8 "
+              >
                 Shifuku{" "}
                 <span className="underline decoration-secondary">(至福)</span>{" "}
                 is the Japanese word for "bliss". The hotel’s signature profile

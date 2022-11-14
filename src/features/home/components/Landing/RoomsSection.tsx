@@ -12,7 +12,10 @@ export const RoomsSection = () => {
       </h1>
       {rooms.map((room) => (
         <div className=" mx-auto my-20" key={room.name[1]}>
-          <h2 className="font-boska xl:text-5xl mb-4 text-3xl md:text-4xl font-medium">
+          <h2
+            className="font-boska xl:text-5xl mb-4
+           text-3xl md:text-4xl font-medium"
+          >
             {room.name[0]}{" "}
             <span className="underline decoration-secondary">
               ({room.name[1]})
@@ -28,7 +31,10 @@ export const RoomsSection = () => {
             />
 
             <div className="flex flex-wrap justify-between items-center">
-              <p className="md:w-9/12 text-md md:text-xl lg:text-2xl  opacity-80 my-4 font-general_sans w-full ">
+              <p
+                className="md:w-9/12 text-md md:text-xl lg:text-2xl
+                opacity-80 my-4 font-general_sans w-full "
+              >
                 {room.details}
               </p>
               <LinkTo

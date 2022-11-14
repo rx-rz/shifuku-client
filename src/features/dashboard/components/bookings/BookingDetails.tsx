@@ -24,8 +24,6 @@ export const BookingDetails = () => {
     handleRoomUpdate({ data: { roomStatus: "active" }, id: roomId });
   };
 
-  
-
   return (
     <div className="min-h-screen py-16 bg-secondary">
       <div className=" w-10/12 mx-auto font-general_sans ">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LinkTo, DashboardCard, Button } from "src/components";
-import { useBookingStore } from "src/store/useBookingStore";
+import { useBookingStore } from "src/store";
 import { Booking } from "src/types";
 import { useUpdateRooms, useAcceptBooking } from "../../api/";
 import { bookingTypeProps, bookingSort } from "../../utils";
@@ -17,7 +17,6 @@ export const BookingList = () => {
   const handleApproval = (id: string, roomId: string) => {
     handleRoomUpdate({ data: { roomStatus: "active" }, id: roomId });
     handleBookingApproval({ id, roomId });
-
   };
 
   const setDate = (timestamp: string) => {

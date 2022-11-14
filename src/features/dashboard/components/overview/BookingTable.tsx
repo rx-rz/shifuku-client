@@ -1,5 +1,5 @@
 import { LinkTo } from "src/components";
-import { useBookingStore } from "src/store/useBookingStore";
+import { useBookingStore } from "src/store";
 
 export const BookingTable = () => {
   const bookings = useBookingStore((state) => state.bookings);

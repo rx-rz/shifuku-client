@@ -2,9 +2,15 @@ import { FallbackImage } from "src/components";
 
 export const MidDescriptionWithImages = () => {
   return (
-    <section className="w-full min-h-screen font-boska mt-40 flex flex-wrap text-center">
+    <section
+      className="w-full min-h-screen font-boska
+     mt-40 flex flex-wrap text-center"
+    >
       <div className=" max-w-6xl mb-24 w-10/12 mx-auto">
-        <h1 className="font-boska text-3xl xl:text-6xl lg:text-5xl md:text-4xl font-medium my-4 ">
+        <h1
+          className="font-boska text-3xl xl:text-6xl lg:text-5xl
+         md:text-4xl font-medium my-4 "
+        >
           Look straight up to the roof. That’s where{" "}
           <span className="underline decoration-secondary">relaxation</span>{" "}
           lives, <span className="underline decoration-secondary">peace</span>{" "}
