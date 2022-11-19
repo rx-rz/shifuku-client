@@ -16,6 +16,7 @@ export const useAvailableRooms = () => {
     return data;
   };
 
+
   const { data, isError, isLoading, error, isFetching } = useQuery(
     ["rooms"],
     fetchRooms

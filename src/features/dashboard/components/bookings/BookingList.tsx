@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { LinkTo, DashboardCard, Button } from "src/components";
 import { useBookingStore } from "src/store";
 import { Booking } from "src/types";
-import { useUpdateRooms, useAcceptBooking } from "../../api/";
+import { useUpdateRooms, useAcceptBooking, useListBooking } from "../../api/";
 import { bookingTypeProps, bookingSort } from "../../utils";
 
 export const BookingList = () => {
   const storedBookings = useBookingStore((state) => state.bookings);
+  const {isFetching} = useListBooking()
+  console.log(isFetching)
 
   const { handleSubmit: handleBookingApproval } = useAcceptBooking();
   const { handleRoomUpdate } = useUpdateRooms();

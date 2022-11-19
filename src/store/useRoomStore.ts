@@ -4,9 +4,9 @@ import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 type RoomState = {
   rooms: Room[];
+  setRooms: (rooms: Room[]) => void;
   deleteRoom: (id: string) => void;
   addRoom: (room: Room[]) => void;
-  setRooms: (rooms: Room[]) => void;
   updateRoom: (data: Room, id: string) => void;
 };
 
@@ -16,6 +16,7 @@ export const useRoomStore = create<RoomState>()(
       (set) => ({
         rooms: [],
 
+        setRooms: (rooms) => set((state) => ({ rooms: rooms })),
         deleteRoom: (id) =>
           set((state) => ({
             rooms: state.rooms.filter((room) => room._id !== id),
@@ -23,8 +24,6 @@ export const useRoomStore = create<RoomState>()(
 
         addRoom: (room) =>
           set((state) => ({ rooms: [...state.rooms, ...room] })),
-
-        setRooms: (rooms) => set((state) => ({ rooms: rooms })),
 
         updateRoom: (data, id) =>
           set((state) => ({

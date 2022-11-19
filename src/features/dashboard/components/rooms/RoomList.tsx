@@ -7,6 +7,7 @@ import { useRoomStore } from "src/store/useRoomStore";
 export const RoomList = () => {
   const { data } = useListRooms();
   const roomStore = useRoomStore((state) => state.rooms);
+  console.log(roomStore)
   const { handleRoomDelete, mutation } = useDeleteRoom();
 
   const [rooms, setRooms] = useState<Room[]>(

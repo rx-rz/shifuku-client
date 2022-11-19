@@ -27,8 +27,9 @@ export const useListBooking = () => {
     isLoading,
     isError,
     data: bookings,
+    isFetching,
     error,
   } = useQuery(["bookings"], fetchBookings, { onSuccess });
 
-  return { bookings, isError, error, isLoading };
+  return { bookings, isError, error, isLoading, isFetching };
 };

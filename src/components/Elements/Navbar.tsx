@@ -35,7 +35,7 @@ export const Navbar = () => {
     return (
       // <header className="sticky top-0">
       <>
-        <nav className="w-10/12 flex justify-between mx-auto sticky lg:top-20 top-10 items-center">
+        <nav className="w-10/12 flex justify-between mx-auto sticky lg:top-20 top-10 items-center z-10">
           <LinkTo to="/" className="text-4xl font-boska font-bold">
             至福
           </LinkTo>

@@ -11,11 +11,15 @@ export const useListRooms = () => {
   };
 
   const onSuccess = (data: Room[]) => {
+    console.log("here")
     setRooms(data);
   };
 
+  const onError = () => {
+    console.log("error")
+  }
   const { data, isError, isLoading, error } = useQuery(["rooms"], fetchRooms, {
-    onSuccess,
+    onSuccess, onError
   });
 
   return { data, isError, isLoading, error };
