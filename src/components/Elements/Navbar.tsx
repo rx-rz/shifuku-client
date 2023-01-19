@@ -22,6 +22,7 @@ export const Navbar = () => {
   const location = useLocation();
   const menu = useRef<HTMLDivElement>(null);
 
+  /*hide or show the menu, */
   const handleMenuVisibility = () => {
     menu.current!.classList.toggle("hidden");
   };

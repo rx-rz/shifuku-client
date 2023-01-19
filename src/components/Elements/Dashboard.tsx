@@ -3,6 +3,7 @@ import { LinkTo } from "./LinkTo";
 import { NavLinkTo } from "./NavLinkTo";
 
 export const Dashboard = () => {
+  /*logout funtion */
   const handleLogOut = () => {
     localStorage.removeItem("user");
     window.location.pathname = "/";
