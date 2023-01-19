@@ -30,6 +30,7 @@ export const SelectField = ({
         defaultValue={defaultValue}
         {...registration}
       >
+        {/*values provided in the props are mapped to the options below. */}
         {values.map((value) => (
           <option value={value} key={value}>
             {value}
