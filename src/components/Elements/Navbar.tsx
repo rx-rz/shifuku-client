@@ -27,10 +27,14 @@ export const Navbar = () => {
     menu.current!.classList.toggle("hidden");
   };
 
-  const { user }: UserAuthProps = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")!)
-    : false;
+  // Retrieve the "user" value from local storage, if it exists
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")!) // parse the JSON string into an object
+    : false; // if no user is found, assign `false`
+
+  // If the current location pathname is "/booking"
   if (location.pathname === "/booking") {
+    // return an empty React component
     return <></>;
   } else {
     return (
