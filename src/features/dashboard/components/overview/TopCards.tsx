@@ -2,23 +2,36 @@ import { DashboardCard } from "src/components";
 import { useBookingStore, useRoomStore } from "src/store";
 
 export const TopCards = () => {
-  const { user } = JSON.parse(localStorage.getItem("user")!);
-  const bookings = useBookingStore((state) => state.bookings);
-  const rooms = useRoomStore((state) => state.rooms);
-  let income = 0;
-  let availableRooms: string[] = [];
-  if (bookings) {
-    for (let i = 0; i < bookings.length; i++) {
-      income += bookings[i].bookingPrice;
+// retrieve the user data from local storage
+const { user } = JSON.parse(localStorage.getItem("user")!);
+
+// retrieve bookings data from the store
+const bookings = useBookingStore((state) => state.bookings);
+
+// retrieve rooms data from the store
+const rooms = useRoomStore((state) => state.rooms);
+
+// initialize the total income to 0
+let income = 0;
+
+// initialize an array to keep track of available rooms
+let availableRooms: string[] = [];
+
+// calculate the total income from the bookings
+if (bookings) {
+  for (let i = 0; i < bookings.length; i++) {
+    income += bookings[i].bookingPrice;
+  }
+}
+
+// find all inactive rooms and add them to the availableRooms array
+if (rooms) {
+  for (let i = 0; i < rooms.length; i++) {
+    if (rooms[i].roomStatus === "inactive") {
+      availableRooms.push(rooms[i].roomStatus);
     }
   }
-  if (rooms) {
-    for (let i = 0; i < rooms.length; i++) {
-      if (rooms[i].roomStatus === "inactive") {
-        availableRooms.push(rooms[i].roomStatus);
-      }
-    }
-  }
+}
 
   return (
     <div className="bg-secondary py-16">

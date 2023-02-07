@@ -8,17 +8,23 @@ import { bookingTypeProps, bookingSort } from "../../utils";
 export const BookingList = () => {
   const storedBookings = useBookingStore((state) => state.bookings);
 
+  // Get booking approval handler from custom hook
   const { handleSubmit: handleBookingApproval } = useAcceptBooking();
+  // Get room update handler from custom hook
   const { handleRoomUpdate } = useUpdateRooms();
+
+  // Keep state of bookings in sync with bookings from store
   const [bookings, setBookings] = useState<Booking[] | undefined>(
     storedBookings
   );
 
+  // Call both approval handlers when approval is made
   const handleApproval = (id: string, roomId: string) => {
     handleRoomUpdate({ data: { roomStatus: "active" }, id: roomId });
     handleBookingApproval({ id, roomId });
   };
 
+  // Format timestamp to date string
   const setDate = (timestamp: string) => {
     const date = new Date(timestamp)
       .toString()

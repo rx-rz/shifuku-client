@@ -1,4 +1,4 @@
-import  { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import { useListRooms, useDeleteRoom } from "../../api/";
 import { Button, LinkTo, DashboardCard } from "src/components";
 import { Room } from "src/types";
@@ -7,30 +7,37 @@ import { useRoomStore } from "src/store/useRoomStore";
 export const RoomList = () => {
   const { data } = useListRooms();
   const roomStore = useRoomStore((state) => state.rooms);
-  console.log(roomStore)
+  console.log(roomStore);
   const { handleRoomDelete, mutation } = useDeleteRoom();
-
+  // Initialize rooms state and sort by room number
   const [rooms, setRooms] = useState<Room[]>(
     roomStore.sort((a, b) => a.roomNumber - b.roomNumber)
   );
 
+  // Function to sort rooms by roomNumber, roomPrice, or roomType
   const roomSort = (a: "roomNumber" | "roomPrice" | "roomType") => {
     if (rooms) {
       switch (a) {
         case "roomNumber":
+          // Sort rooms by roomNumber in descending order
           const roomNumberSort = rooms.sort(
             (a, b) => b.roomNumber - a.roomNumber
           );
+          // Update state with sorted rooms
           setRooms([...roomNumberSort]);
           break;
         case "roomPrice":
+          // Sort rooms by roomPrice
           const priceSort = rooms.sort((a, b) => b.roomPrice - a.roomPrice);
+          // Update state with sorted rooms
           setRooms([...priceSort]);
           break;
         case "roomType":
+          // Sort rooms by roomType
           const roomTypeSort = rooms.sort((a, b) =>
             a.roomType.localeCompare(b.roomType)
           );
+          // Update state with sorted rooms
           setRooms([...roomTypeSort]);
       }
     }

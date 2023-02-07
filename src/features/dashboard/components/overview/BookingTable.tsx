@@ -4,13 +4,15 @@ import { useBookingStore } from "src/store";
 export const BookingTable = () => {
   const bookings = useBookingStore((state) => state.bookings);
 
-  const latestBookings =
-    bookings &&
-    bookings
-      .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
-      .slice(0, 8)
-      .filter((booking) => (booking.bookingStatus === "pending"));
+  // Get the 8 latest bookings with status 'pending'
+  const latestBookings = bookings
+    ? bookings
+        .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+        .slice(0, 8)
+        .filter((booking) => booking.bookingStatus === "pending")
+    : [];
 
+  // Format the date to display only the day, month and year
   const setDate = (timestamp: string) => {
     const date = new Date(timestamp)
       .toString()
@@ -19,7 +21,7 @@ export const BookingTable = () => {
       .join(" ");
     return date;
   };
-
+  
   return (
     <div>
       <div className="flex justify-between items-center mt-4">

@@ -2,14 +2,16 @@ import { LinkTo } from "src/components";
 import { useRoomStore } from "src/store";
 
 export const RoomTable = () => {
+  // Access the `rooms` data from the room store
   const rooms = useRoomStore((state) => state.rooms);
 
+  // Filter the available rooms with status "active" and sort by room number
   const availableRooms =
     rooms &&
     rooms
       .sort((a, b) => a.roomNumber - b.roomNumber)
-      .slice(1, 4)
-      .filter((room) => (room.roomStatus = "active"));
+      .slice(1, 4) // Only select first 4 rooms
+      .filter((room) => (room.roomStatus = "active")); // Select only rooms with status "active"
 
   return (
     <div>
