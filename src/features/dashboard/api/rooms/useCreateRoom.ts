@@ -15,11 +15,16 @@ type RoomFormProps = {
 };
 
 export const useCreateRoom = () => {
+  // get rooms from "useListRooms" hook
   const { data: rooms } = useListRooms();
+  // get addRoom method from "useRoomStore" hook
   const addRoomStore = useRoomStore((state) => state.addRoom);
+  // get queryClient from "useQueryClient" hook
   const queryClient = useQueryClient();
+  // calculate noOfRooms by adding the length of rooms + 1
   const noOfRooms = rooms && rooms?.length + 1;
 
+  // make a POST request to "/rooms" endpoint with the data
   const postRooms = async (data: Omit<RoomFormProps, "noOfRooms">) => {
     const response = await axios.post(
       `${process.env.REACT_APP_LIVE_URL}/rooms`,
@@ -28,26 +33,36 @@ export const useCreateRoom = () => {
     return response.data;
   };
 
+  // callback to be called after a successful mutation
   const onSuccess = async (data: Room[]) => {
+    // add rooms to the store
     addRoomStore(data);
+    // show success toast message
     successToast("Room created successfully.");
+    // invalidate "rooms" query and redirect after 1.5 seconds
     await queryClient.invalidateQueries(["rooms"]).then(() => {
       setTimeout(() => (window.location.pathname = "/dashboard/rooms"), 1500);
     });
   };
 
+  // callback to be called after an error occurs
   const onError = () => {
+    // show error toast message
     errorToast("An error occured. Please try again.");
   };
 
+  // use mutation hook to make a POST request
   const mutation = useMutation(postRooms);
 
+  // handle form submit
   const handleSubmit = (data: RoomFormProps) => {
+    // loop through the number of rooms specified
     for (
       let i = noOfRooms && noOfRooms;
       i! < noOfRooms! + Number.parseInt(data.noOfRooms);
       i!++
     ) {
+      // set the room URL based on room type
       switch (data.roomType) {
         case "Shizukana":
           data.roomUrl = "/images/shizu1";
@@ -63,6 +78,7 @@ export const useCreateRoom = () => {
           break;
       }
 
+      // mutate with the room data and call onSuccess and onError callbacks
       mutation.mutate(
         {
           ...data,
@@ -75,5 +91,6 @@ export const useCreateRoom = () => {
     }
   };
 
+  // return the handleSubmit method and mutation object
   return { mutation, handleSubmit };
 };
