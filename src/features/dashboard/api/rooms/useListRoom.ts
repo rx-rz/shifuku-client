@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRoomStore } from "src/store/useRoomStore";
 import { Room } from "src/types";
+import { errorToast } from "src/utils/toasts";
 
 export const useListRooms = () => {
   const setRooms = useRoomStore((state) => state.setRooms);
@@ -11,12 +12,11 @@ export const useListRooms = () => {
   };
 
   const onSuccess = (data: Room[]) => {
-    console.log("here")
     setRooms(data);
   };
 
   const onError = () => {
-    console.log("error")
+    errorToast("Unable to fetch rooms.")
   }
   const { data, isError, isLoading, error } = useQuery(["rooms"], fetchRooms, {
     onSuccess, onError
